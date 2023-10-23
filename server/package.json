@@ -1,8 +1,8 @@
 {
-  "name": "task-manager-app",
+  "name": "server",
   "version": "1.0.0",
   "description": "task manager application with sorting base on priority, categories, and due date.",
-  "main": "server/app.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
