@@ -1,0 +1,43 @@
+# Node.js
+node_modules/
+npm-debug.log
+
+# Angular
+/dist/
+/e2e/
+
+# Visual Studio Code
+.vscode/
+
+# Compiled TypeScript
+*.js
+*.js.map
+*.js.LICENSE.txt
+*.js.br
+*.js.gz
+*.d.ts
+
+# Dependency directories
+/jspm_packages/
+/node_modules/
+/systemjs/
+/bower_components/
+/lib/
+/vendor/
+/*/sass/
+/logs/
+/public/assets/
+/public/system/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other generated files
+/dist/
+tmp
+/public/system/
+
+# Database (PostgreSQL)
+/db/
+*.sql
