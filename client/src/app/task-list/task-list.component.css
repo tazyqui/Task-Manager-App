@@ -1,0 +1,5 @@
+.task-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* You can adjust this based on your design */
+}

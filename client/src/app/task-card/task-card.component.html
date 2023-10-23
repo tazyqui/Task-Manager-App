@@ -1,0 +1,18 @@
+<mat-card class="task-card">
+  <mat-card-header>
+    <mat-card-title> {{ task.task_name }} </mat-card-title>
+    <div *ngIf="task.priority === 'High'" mat-card-avatar class="high-priority"></div>
+    <div *ngIf="task.priority === 'Medium'" mat-card-avatar class="medium-priority"></div>
+    <div *ngIf="task.priority === 'Low'" mat-card-avatar class="low-priority"></div>
+    <div *ngIf="task.priority === 'None'" mat-card-avatar class="none-priority"></div>
+    <mat-card-subtitle> {{ task.due_date | date:'MM-dd-yyyy' }} </mat-card-subtitle>
+    <mat-card-subtitle> {{ task.category }} </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ task.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="editTask()">EDIT</button>
+    <button mat-button (click)="deleteTask()">DELETE</button>
+  </mat-card-actions>
+</mat-card>

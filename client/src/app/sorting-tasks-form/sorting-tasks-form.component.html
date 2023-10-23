@@ -1,0 +1,12 @@
+<h2>Sort Tasks</h2>
+
+<form>
+    <mat-form-field>
+        <mat-label>Sort by:</mat-label>
+        <mat-select name="sortOption" [(ngModel)]="selectedSortOption" (ngModelChange)="onSortingOptionChange()">
+            <mat-option value="priority">Priority</mat-option>
+            <mat-option value="due_date">Due Date</mat-option>
+            <mat-option value="category">Category</mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
