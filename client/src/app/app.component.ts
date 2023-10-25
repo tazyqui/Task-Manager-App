@@ -6,11 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'Task Manager';
-  sortingOption: string = "priority";
-  
-  //
-  applySorting(sortingOption:string): void{
-    this.sortingOption = sortingOption;
-  }
 }
