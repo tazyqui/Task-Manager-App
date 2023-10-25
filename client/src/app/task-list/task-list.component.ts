@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
 import { Task } from '../task.model';
 
@@ -16,22 +16,26 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to taskList$ and sortingOption
     this.taskService.taskListSubject.subscribe((tasks) => {
+      console.log("Local task list updated");
       this.tasks = tasks;
       this.applySorting();
     });
-  
+
     this.taskService.sortingOptionSubject.subscribe((sortingOption) => {
+      console.log(`New Sorting option selected: ${sortingOption}`);
       this.sortingOption = sortingOption;
       this.applySorting();
     });
-  
+
     // Load tasks after setting up subscriptions
     this.loadTasks();
   }
-  
+
 
   loadTasks(): void {
-    this.taskService.getTasks().subscribe(); // No need to manually update tasks, they will be updated through the subscription.
+    this.taskService.getTasks().subscribe(() => {
+      console.log('Tasks loaded successfully');
+    });
   }
 
   applySorting(): void {
@@ -48,11 +52,12 @@ export class TaskListComponent implements OnInit {
       });
     } else if (this.sortingOption === 'due_date') {
       this.tasks = this.tasks.slice().sort((a, b) => {
-        const dateA = a.due_date ? new Date(a.due_date) : new Date(0); 
+        const dateA = a.due_date ? new Date(a.due_date) : new Date(0);
         const dateB = b.due_date ? new Date(b.due_date) : new Date(0);
         return dateA.getTime() - dateB.getTime();
       });
-      
+
     }
+    console.log('Tasks sorted successfully');
   }
 }

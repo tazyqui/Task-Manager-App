@@ -9,11 +9,9 @@ import { TaskService } from '../task.service';
 export class SortingTasksFormComponent {
   selectedSortOption: string = 'priority';
 
-  //@Output() sortingOptionSelected = new EventEmitter<string>();
-
   constructor(private taskService: TaskService) { }
 
-  onSortingOptionChange() {
+  onSortingOptionChange():void {
     // Update the sorting option via TaskService
     this.taskService.setSortingOption(this.selectedSortOption);
   }

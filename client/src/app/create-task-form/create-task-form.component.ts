@@ -21,11 +21,12 @@ export class CreateTaskFormComponent {
     });
   }
 
-  onCreateTask() {
+  onCreateTask():void {
     if (this.taskForm.valid) {
       const newTaskData = this.taskForm.value;
 
       this.taskService.createTask(newTaskData).subscribe(() => {
+        console.log("Task created sucessfully!");
         this.taskForm.reset(); // Optionally, reset the form after submission
       });
     }

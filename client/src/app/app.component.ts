@@ -10,7 +10,7 @@ export class AppComponent {
   sortingOption: string = "priority";
   
   //
-  applySorting(sortingOption:string){
+  applySorting(sortingOption:string): void{
     this.sortingOption = sortingOption;
   }
 }

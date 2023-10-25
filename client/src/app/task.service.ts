@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Task } from './task.model';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,16 +16,17 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  // Fetch task data from an API or database
+  // Fetch tasks from database using API
   getTasks(): Observable<Task[]> {
     const url = `${this.apiBaseUrl}`;
     return this.http.get<Task[]>(url).pipe(
       tap((tasks: Task[]) => {
-        this.taskListSubject.next(tasks); // Update the task list subject
+        this.taskListSubject.next(tasks);
       })
     );
   }
 
+  // Delete task from database using API
   deleteTask(taskId: number): Observable<void> {
     const url = `${this.apiBaseUrl}/${taskId}`;
     return this.http.delete<void>(url).pipe(
@@ -37,10 +37,10 @@ export class TaskService {
       })
     );
   }
-
-  createTask(taskData: Task): Observable<Task> {
-    // Your create logic here
-    return this.http.post<Task>(this.apiBaseUrl, taskData).pipe(
+  
+  // Create task from database using API
+  createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.apiBaseUrl, task).pipe(
       tap((createdTask: Task) => {
         // Add the newly created task to the task list subject
         const updatedTasks = [...this.taskListSubject.value, createdTask];
@@ -49,6 +49,7 @@ export class TaskService {
     );
   }
 
+  // Update task data from database using API
   updateTask(task: Task): Observable<Task> {
     const url = `${this.apiBaseUrl}/${task.id}`;
     return this.http.put<Task>(url, task).pipe(
@@ -62,6 +63,7 @@ export class TaskService {
     );
   }
 
+  // Change Sorting Option
   setSortingOption(option: string) {
     this.sortingOptionSubject.next(option);
   }

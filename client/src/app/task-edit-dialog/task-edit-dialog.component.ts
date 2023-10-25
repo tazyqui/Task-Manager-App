@@ -27,7 +27,7 @@ export class TaskEditDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.data.task) {
       this.taskForm.patchValue({
         task_name: this.data.task.task_name,
@@ -39,7 +39,7 @@ export class TaskEditDialogComponent implements OnInit {
     }
   }
 
-  onSaveClick() {
+  onSaveClick(): void {
     if (this.taskForm.valid) {
       // Include the ID in the edited data
       const editedTaskData = {
@@ -50,7 +50,7 @@ export class TaskEditDialogComponent implements OnInit {
     }
   }
 
-  onCancelClick() {
+  onCancelClick(): void {
     this.dialogRef.close(); // Close the dialog without saving
   }
 }

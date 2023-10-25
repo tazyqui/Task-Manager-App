@@ -18,10 +18,13 @@ router.post("/tasks", async (req, res) => {
   const { task_name, description, due_date, priority, category } = req.body;
 
   try {
-    const { rows } = await db.query(
-      "INSERT INTO tasks (task_name, description, due_date, priority, category) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [task_name, description, due_date, priority, category]
-    );
+    const insertTaskQuery = `
+      INSERT INTO tasks (task_name, description, due_date, priority, category) 
+      VALUES ($1, $2, $3, $4, $5) 
+      RETURNING *
+      `;
+
+    const { rows } = await db.query(insertTaskQuery, [task_name, description, due_date, priority, category]);
 
     res.status(201).json(rows[0]);
   } catch (error) {
@@ -33,7 +36,7 @@ router.post("/tasks", async (req, res) => {
 // Update task by ID
 router.put("/tasks/:id", async (req, res) => {
   const taskId = req.params.id;
-  const updatedTask = req.body;
+  const { task_name, description, due_date, priority, category } = req.body;
 
   try {
     // Define the SQL query to update the task based on its ID
@@ -44,8 +47,6 @@ router.put("/tasks/:id", async (req, res) => {
         RETURNING *
       `;
 
-    const { task_name, description, due_date, priority, category } =
-      updatedTask;
 
     const result = await db.query(updateTaskQuery, [
       task_name,
@@ -75,8 +76,7 @@ router.delete('/tasks/:id', async (req, res) => {
   const taskId = req.params.id;
 
   try {
-    // Define the SQL query to delete the task based on its ID
-    const deleteTaskQuery = 'DELETE FROM tasks WHERE id = $1';
+    const deleteTaskQuery = `DELETE FROM tasks WHERE id = $1`;
 
     // Execute the query with the task ID
     const result = await db.query(deleteTaskQuery, [taskId]);
@@ -93,6 +93,5 @@ router.delete('/tasks/:id', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
 
 module.exports = router;
